@@ -1,22 +1,23 @@
 #!/bin/sh
 
-APP_NAME=cockpit
+SERVER_NAME=localhost
 
 IP_ADDR=`hostname --ip-address | gawk '{print $2}'`
 
-APP_DIR=/etc/pki/tls/$APP_NAME
+SERVER_DIR=/etc/pki/tls/$SERVER_NAME
 
-rm -rf $APP_DIR
+rm -rf $SERVER_DIR
 
-mkdir -p $APP_DIR/private
+mkdir -p $SERVER_DIR/private
 
 openssl req -new -sha256 -days 3650 \
 	-newkey rsa:4096 \
 	-subj "/C=JP/ST=Kanagawa/L=Yokohama/O=Personal/CN=$IP_ADDR" \
-	-out $APP_DIR/$APP_NAME.csr -keyout $APP_DIR/private/$APP_NAME.key
+	-out $SERVER_DIR/$SERVER_NAME.csr \
+	-keyout $SERVER_DIR/private/$SERVER_NAME.key
 
-openssl rsa -in $APP_DIR/private/$APP_NAME.key \
-			-out $APP_DIR/private/$APP_NAME.key
+openssl rsa -in $SERVER_DIR/private/$SERVER_NAME.key \
+			-out $SERVER_DIR/private/$SERVER_NAME.key
 
 
 

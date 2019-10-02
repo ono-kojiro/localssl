@@ -354,5 +354,5 @@ ess_cert_id_alg		= sha1	# algorithm to compute certificate
 
 [ alt_names ]
 DNS.1 = localhost
-IP.1 = 192.168.11.17
+IP.1 = 192.168.56.105
 IP.2 = 127.0.0.1
