@@ -1,0 +1,26 @@
+#!/bin/sh
+
+IP_ADDRESS=`hostname --ip-address | gawk '{print $2}'`
+CA_DIR=/etc/pki/tls/myCA
+
+echo IP_ADDRESS is $IP_ADDRESS
+
+echo remove $CA_DIR
+rm -rf $CA_DIR
+
+echo create $CA_DIR
+mkdir -p $CA_DIR/{newcerts,certs,crl,private}
+chmod 700 $CA_DIR
+
+touch $CA_DIR/index.txt
+echo 00|tee $CA_DIR/serial
+
+echo create CA
+openssl req -config /etc/pki/tls/openssl.cnf \
+	-new -x509 -sha256 -days 3650 -newkey rsa:4096 \
+	-subj "/C=JP/ST=Kanagawa/L=Yokohama/O=Personal/CN=$IP_ADDRESS" \
+	-out $CA_DIR/cacert.crt -keyout $CA_DIR/private/cakey.pem
+
+echo remove passphrase
+openssl rsa -in $CA_DIR/private/cakey.pem -out $CA_DIR/private/cakey.pem
+

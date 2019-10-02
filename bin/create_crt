@@ -1,0 +1,16 @@
+#!/bin/sh
+
+CA_DIR=/etc/pki/tls/myCA
+CONFIG_DIR="$( cd "$(dirname "$0")"/../conf/ ; pwd -P )"
+
+APP_NAME=cockpit
+
+APP_DIR=/etc/pki/tls/${APP_NAME}
+
+openssl ca -config ${CONFIG_DIR}/openssl.cnf \
+	-days 3650 \
+	 -keyfile ${CA_DIR}/private/cakey.pem \
+	-cert ${CA_DIR}/cacert.crt \
+	-in ${APP_DIR}/${APP_NAME}.csr \
+	-out ${APP_DIR}/${APP_NAME}.crt
+
