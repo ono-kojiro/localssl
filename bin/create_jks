@@ -1,0 +1,22 @@
+#!/bin/sh
+
+SERVER_NAME=localhost
+
+SERVER_DIR=/etc/pki/tls/$SERVER_NAME
+	
+P12=${SERVER_DIR}/private/${SERVER_NAME}.p12
+JKS=${SERVER_DIR}/private/${SERVER_NAME}.jks
+
+echo -n Password:
+read -s password
+echo
+
+keytool \
+	-importkeystore \
+	-srckeystore $P12 \
+	-srcstorepass "$password" \
+	-srcstoretype pkcs12 \
+	-destkeystore $JKS \
+	-deststorepass "$password" \
+	-deststoretype JKS
+

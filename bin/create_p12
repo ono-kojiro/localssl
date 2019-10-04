@@ -1,0 +1,14 @@
+#!/bin/sh
+
+SERVER_NAME=localhost
+
+IP_ADDR=`hostname --ip-address | gawk '{print $2}'`
+
+SERVER_DIR=/etc/pki/tls/$SERVER_NAME
+
+openssl pkcs12 \
+	-export \
+	-in ${SERVER_DIR}/${SERVER_NAME}.crt \
+	-inkey ${SERVER_DIR}/private/${SERVER_NAME}.key \
+	-out ${SERVER_DIR}/private/${SERVER_NAME}.p12
+
