@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CA_DIR=/etc/pki/tls/myCA
+CA_DIR=/etc/pki/tls
 CONFIG_DIR="$( cd "$(dirname "$0")"/../conf/ ; pwd -P )"
 
 SERVER_NAME=localhost

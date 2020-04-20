@@ -1,8 +1,8 @@
 #!/bin/sh
 
-SERVER_NAME=localhost
+CONFIG_DIR="$( cd "$(dirname "$0")"/../conf/ ; pwd -P )"
 
-IP_ADDR=`hostname --ip-address | gawk '{print $2}'`
+SERVER_NAME=localhost
 
 SERVER_DIR=/etc/pki/tls/$SERVER_NAME
 

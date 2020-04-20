@@ -42,7 +42,7 @@ default_ca	= CA_default		# The default ca section
 ####################################################################
 [ CA_default ]
 
-dir		= /etc/pki/tls/myCA		# Where everything is kept
+dir		= /etc/pki/tls		# Where everything is kept
 certs		= $dir/certs		# Where the issued certs are kept
 crl_dir		= $dir/crl		# Where the issued crl are kept
 database	= $dir/index.txt	# database index file.
@@ -328,7 +328,7 @@ default_tsa = tsa_config1	# the default TSA section
 [ tsa_config1 ]
 
 # These are used by the TSA reply generation only.
-dir		= /etc/pki/tls/myCA		# TSA root directory
+dir		= /etc/pki/tls		# TSA root directory
 serial		= $dir/tsaserial	# The current serial number (mandatory)
 crypto_device	= builtin		# OpenSSL engine to use for signing
 signer_cert	= $dir/tsacert.pem 	# The TSA signing certificate
@@ -354,5 +354,5 @@ ess_cert_id_alg		= sha1	# algorithm to compute certificate
 
 [ alt_names ]
 DNS.1 = localhost
-IP.1 = 192.168.56.105
+IP.1 = 192.168.11.25
 IP.2 = 127.0.0.1
